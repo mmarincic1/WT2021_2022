@@ -1,0 +1,80 @@
+@objects
+	body body
+	upiti #upiti
+	upiti1 #upiti1
+	vjezba #vjezba
+	zadatak #zadatak
+	verzija #verzija
+	komentar #komentar
+	posaljiBtn #posaljiBtn
+	error #error
+	erroraBez #errorabez
+	dodajRezTesta #dodajRezTesta
+= Width section =
+	upiti:
+		width 98 to 100% of body/width
+	upiti1:
+		width 98 to 100% of body/width
+
+= Height section =
+
+= Inside section =
+	vjezba:
+		inside upiti
+	zadatak:
+		inside upiti
+	verzija:
+		inside upiti
+	komentar:
+		inside upiti
+	error:
+		inside upiti1
+	erroraBez:
+		inside upiti1
+	dodajRezTesta:
+		inside upiti1
+
+= Left of section =
+
+= Right of section =
+
+= Above section =
+	vjezba:
+		above zadatak
+	zadatak:
+		above verzija
+	verzija:
+		above komentar
+	komentar:
+		above posaljiBtn
+	upiti:
+		above upiti1
+
+= Below section =
+	upiti1:
+		below upiti
+
+= Visible section =
+	upiti:
+		visible 
+	upiti1:
+		visible 
+	vjezba:
+		visible
+	zadatak:
+		visible
+	verzija:
+		visible
+	komentar:
+		visible
+	posaljiBtn:
+		visible
+	error:
+		visible 
+	erroraBez:
+		visible
+	dodajRezTesta:
+		visible 
+
+= Inside partly section =
+

@@ -1,0 +1,49 @@
+@objects
+	body body
+	upiti #upiti
+	urlRepo #urlRepo
+	godina #godina
+	branchName #branchName
+	posaljiBtn #posaljiBtn
+= Width section =
+	upiti:
+		width 70 to 90% of body/width
+
+= Height section =
+
+= Inside section =
+	urlRepo:
+		inside upiti
+	godina:
+		inside upiti
+	branchName:
+		inside upiti
+
+= Left of section =
+
+= Right of section =
+
+= Above section =
+	urlRepo:
+		above godina
+	godina:
+		above branchName
+	branchName:
+		above posaljiBtn
+
+= Below section =
+
+= Visible section =
+	upiti:
+		visible
+	urlRepo:
+		visible
+	godina:
+		visible
+	branchName:
+		visible
+	posaljiBtn:
+		visible
+
+= Inside partly section =
+
