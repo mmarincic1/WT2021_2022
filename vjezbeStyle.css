@@ -98,7 +98,7 @@ body{
 
     }  
 
-    @media screen and (max-width:799px) {
+    @media screen and (min-width:500px) and (max-width:799px) {
           #odabirVjezbe{
               width: 100%;
               box-sizing: border-box;
@@ -112,5 +112,55 @@ body{
             grid-template-columns: auto;
           }
     
-        }  
+    }
+    
+    @media screen and (max-width:499px) {
+      .meni{
+        width: 100%;
+        border-bottom: 1px solid rgb(4, 35, 77);
+        text-align: center;
+        vertical-align: middle;
+        box-sizing: border-box;
+      }
+      
+      .meni li {
+            display: block;
+            padding: 5px;
+        }
+        
+        .meni ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }   
+        
+        #menu{
+          padding: 0;
+          padding-top: 30px;
+          position: relative;
+        }
+
+      #odabirVjezbe{
+          width: 100%;
+          box-sizing: border-box;
+          border-bottom: 1px solid rgb(4, 35, 77);
+      }
+
+      .grafovi{
+        width: 100%;
+        box-sizing: border-box;
+        padding: 10px;
+        grid-template-columns: auto;
+      }
+
+      #vjezba{
+        font-size: 10px;
+      }
+
+      #zadaciBtn{
+        font-size: 50%;
+      }
+
+    } 
+      
     
