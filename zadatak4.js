@@ -225,7 +225,7 @@ describe('TestoviParser', function () {
                 ]
             }
             var test1 = TestoviParser.porediRezultate(JSON.stringify(json1), JSON.stringify(json2));
-            assert.equal(JSON.stringify(test1), '{"promjena":"50%","greske":["Treba proci 1","Treba proci 2"]}');
+            assert.equal(JSON.stringify(test1), '{"promjena":"50%","greske":["Treba proci 1"]}');
         });
 
         it('Razlicit broj testova1', function () {

@@ -49,16 +49,16 @@ let TestoviParser = (function () {
             }
         }
         if (istiSu) {
-            // rezultat od rez2, greske od rez1
+            // rezultat od rez2, greske od rez2
             var jsonString = '{"promjena":"';
             var tacnost2 = dajTacnost(rezultat2);
             jsonString += tacnost2.tacnost + '","greske":[';
-            var greske1 = dajTacnost(rezultat1).greske;
-            greske1.sort();
-            for (let i = 0; i < greske1.length; i++)
-                jsonString += '"' + greske1[i] + '",';
+            var greske2 = dajTacnost(rezultat2).greske;
+            greske2.sort();
+            for (let i = 0; i < greske2.length; i++)
+                jsonString += '"' + greske2[i] + '",';
 
-            if (greske1.length != 0)
+            if (greske2.length != 0)
                 jsonString = jsonString.slice(0, -1);
             jsonString += ']}';
             return JSON.parse(jsonString);
