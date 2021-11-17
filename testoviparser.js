@@ -3,6 +3,12 @@ let TestoviParser = (function () {
         // Neispravan format JSONa
         try {
             const proba = JSON.parse(Json);
+            if(!proba.hasOwnProperty('stats')
+                || !proba.hasOwnProperty('tests')
+                || !proba.hasOwnProperty('failures')   
+                || !proba.hasOwnProperty('passes') 
+            )
+            throw error;
         } catch (error) {
             return JSON.parse('{"tacnost":"0%","greske":["Testovi se ne mogu izvršiti"]}');
         }
@@ -28,6 +34,11 @@ let TestoviParser = (function () {
         try {
             const proba1 = JSON.parse(rezultat1);
             const proba2 = JSON.parse(rezultat2);
+             if(!proba1.hasOwnProperty('stats') || !proba2.hasOwnProperty('stats')
+                || !proba1.hasOwnProperty('tests') || !proba2.hasOwnProperty('tests') 
+                || !proba1.hasOwnProperty('failures') || !proba2.hasOwnProperty('failures')  
+                || !proba1.hasOwnProperty('passes') || !proba2.hasOwnProperty('passes'))
+                throw error;
         } catch (error) {
             return JSON.parse('{"promjena":"0%","greske":["Testovi se ne mogu izvršiti"]}');
         }
