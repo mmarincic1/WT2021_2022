@@ -852,6 +852,156 @@ describe('TestoviParser', function () {
             var test1 = TestoviParser.porediRezultate("Ovo nije JSON fomat" , JSON.stringify(json1));
             assert.equal(JSON.stringify(test1), '{"promjena":"0%","greske":["Testovi se ne mogu izvršiti"]}');
         });
-
+        it('Izuzetak3', function () {
+            var json1 = {
+                "tests": [
+                    {
+                        "title": "T1 PASS",
+                        "fullTitle": "T1 PASS",
+                        "file": null,
+                        "duration": 1,
+                        "currentRetry": 0,
+                        "speed": "fast",
+                        "err": {}
+                    },
+                    {
+                        "title": "T2 FAIL",
+                        "fullTitle": "T2 FAIL",
+                        "file": null,
+                        "duration": 0,
+                        "currentRetry": 0,
+                        "speed": "fast",
+                        "err": {}
+                    },
+                    {
+                        "title": "T4 FAIL",
+                        "fullTitle": "T4 FAIL",
+                        "file": null,
+                        "duration": 0,
+                        "currentRetry": 0,
+                        "speed": "fast",
+                        "err": {}
+                    },
+                    {
+                        "title": "T5 FAIL",
+                        "fullTitle": "T5 FAIL",
+                        "file": null,
+                        "duration": 0,
+                        "currentRetry": 0,
+                        "speed": "fast",
+                        "err": {}
+                    }
+                ],
+                "pending": [],
+                "failures": [
+                    {
+                        "title": "T2 FAIL",
+                        "fullTitle": "T2 FAIL",
+                        "file": null,
+                        "duration": 0,
+                        "currentRetry": 0,
+                        "speed": "fast",
+                        "err": {}
+                    },
+                    {
+                        "title": "T4 FAIL",
+                        "fullTitle": "T4 FAIL",
+                        "file": null,
+                        "duration": 0,
+                        "currentRetry": 0,
+                        "speed": "fast",
+                        "err": {}
+                    },
+                    {
+                        "title": "T5 FAIL",
+                        "fullTitle": "T5 FAIL",
+                        "file": null,
+                        "duration": 0,
+                        "currentRetry": 0,
+                        "speed": "fast",
+                        "err": {}
+                    }
+                ],
+                "passes": [
+                    {
+                        "title": "T1 PASS",
+                        "fullTitle": "T1 PASS",
+                        "file": null,
+                        "duration": 0,
+                        "currentRetry": 0,
+                        "speed": "fast",
+                        "err": {}
+                    }
+                ]
+            }
+            var test1 = TestoviParser.porediRezultate(JSON.stringify(json1), JSON.stringify(json1));
+            assert.equal(JSON.stringify(test1), '{"promjena":"0%","greske":["Testovi se ne mogu izvršiti"]}');
+        });
+        it('Izuzetak4', function () {
+            var json1 = {
+                "stats": {
+                    "suites": 2,
+                    "tests": 4,
+                    "passes": 1,
+                    "pending": 0,
+                    "failures": 3,
+                    "start": "2021-11-05T15:00:26.343Z",
+                    "end": "2021-11-05T15:00:26.352Z",
+                    "duration": 9
+                },
+                "tests": [
+                    {
+                        "title": "T1 PASS",
+                        "fullTitle": "T1 PASS",
+                        "file": null,
+                        "duration": 1,
+                        "currentRetry": 0,
+                        "speed": "fast",
+                        "err": {}
+                    },
+                    {
+                        "title": "T2 FAIL",
+                        "fullTitle": "T2 FAIL",
+                        "file": null,
+                        "duration": 0,
+                        "currentRetry": 0,
+                        "speed": "fast",
+                        "err": {}
+                    },
+                    {
+                        "title": "T4 FAIL",
+                        "fullTitle": "T4 FAIL",
+                        "file": null,
+                        "duration": 0,
+                        "currentRetry": 0,
+                        "speed": "fast",
+                        "err": {}
+                    },
+                    {
+                        "title": "T5 FAIL",
+                        "fullTitle": "T5 FAIL",
+                        "file": null,
+                        "duration": 0,
+                        "currentRetry": 0,
+                        "speed": "fast",
+                        "err": {}
+                    }
+                ],
+                "pending": [],
+                "passes": [
+                    {
+                        "title": "T1 PASS",
+                        "fullTitle": "T1 PASS",
+                        "file": null,
+                        "duration": 0,
+                        "currentRetry": 0,
+                        "speed": "fast",
+                        "err": {}
+                    }
+                ]
+            }
+            var test1 = TestoviParser.porediRezultate(JSON.stringify(json1), JSON.stringify(json1));
+            assert.equal(JSON.stringify(test1), '{"promjena":"0%","greske":["Testovi se ne mogu izvršiti"]}');
+        });
     });
 });

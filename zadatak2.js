@@ -257,8 +257,57 @@ describe('TestoviParser', function () {
             assert.equal(JSON.stringify(test1), '{"tacnost":"33.3%","greske":["Ne treba proci 2","Ne treba proci 3"]}');
         });
 
-        it('Pogresan JSON format-testovi se ne mogu izvrsiti', function () {
+        it('Pogresan JSON format-testovi se ne mogu izvrsiti1', function () {
             var json = "Ovo nije JSON format!";
+            var test1 = TestoviParser.dajTacnost(json);
+            assert.equal(JSON.stringify(test1), '{"tacnost":"0%","greske":["Testovi se ne mogu izvršiti"]}');
+        });
+
+        it('Pogresan JSON format-testovi se ne mogu izvrsiti2', function () {
+            var json = {
+                "stats": {
+                    "suites": 2,
+                    "tests": 3,
+                    "passes": 1,
+                    "pending": 0,
+                    "failures": 1,
+                    "start": "2021-11-05T15:00:26.343Z",
+                    "end": "2021-11-05T15:00:26.352Z",
+                    "duration": 9
+                },
+                "pending": [],
+                "failures": [
+                    {
+                        "title": "ne treba proci2",
+                        "fullTitle": "Ne treba proci 2",
+                        "file": null,
+                        "duration": 0,
+                        "currentRetry": 0,
+                        "speed": "fast",
+                        "err": {}
+                    },
+                    {
+                        "title": "ne treba proci3",
+                        "fullTitle": "Ne treba proci 3",
+                        "file": null,
+                        "duration": 0,
+                        "currentRetry": 0,
+                        "speed": "fast",
+                        "err": {}
+                    }
+                ],
+                "passes": [
+                    {
+                        "title": "treba proci1",
+                        "fullTitle": "Treba proci 1",
+                        "file": null,
+                        "duration": 1,
+                        "currentRetry": 0,
+                        "speed": "fast",
+                        "err": {}
+                    },
+                ]
+            }
             var test1 = TestoviParser.dajTacnost(json);
             assert.equal(JSON.stringify(test1), '{"tacnost":"0%","greske":["Testovi se ne mogu izvršiti"]}');
         });
