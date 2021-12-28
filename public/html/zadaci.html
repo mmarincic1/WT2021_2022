@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<HTML>
+
+<HEAD>
+    <TITLE>Zadaci</TITLE>
+    <link rel="stylesheet" href="../css/zadaciStyle.css">
+</HEAD>
+
+<BODY>
+    <div class="upiti" id="upiti">
+        <div class="lijevo" id="lijevo">
+            <form>
+                <label for="vjezba">Odabir vježbe:</label>
+                <select name="vjezba" id="vjezba">
+                    <option value="VjezbaI">Vjezba I</option>
+                    <option value="VjezbaII">Vjezba II</option>
+                    <option value="VjezbaIII">Vjezba III</option>
+                </select>
+
+                <label for="zadatak">Odabir zadatka:</label>
+                <select name="zadatak" id="zadatak">
+                    <option value="zadatak1">Zadatak 1</option>
+                    <option value="zadatak2">Zadatak 2</option>
+                    <option value="zadatak3">Zadatak 3</option>
+                    <option value="zadatak4">Zadatak 4</option>
+                </select>
+
+                <label for="verzija">Odabir verzije:</label>
+                <select name="verzija" id="verzija">
+                    <option value="verzija1">Verzija 1.0</option>
+                    <option value="verzija1.1">Verzija 1.1</option>
+                    <option value="verzija1.2">Verzija 1.2</option>
+                </select>
+            </form>
+            <form>
+                <div>
+                    <label for="komentar">Komentar:</label>
+                    <textarea name="komentar" id="komentar" cols="30" rows=5%></textarea>
+                </div>
+                <button type="button" id="posaljiBtn">Pošalji</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="upiti1" id="upiti1">
+        <div class="desno" id="desno">
+            <form>
+                <div>
+                    <label for="error">Errors log:</label>
+                    <textarea name="error" id="error" cols="30" rows=5%></textarea>
+                </div>
+                <div>
+                    <input type="checkbox" id="errorabez" name="errorabez" value="Error">
+                    <label for="errorabez">Bez grešaka</label>
+                </div>
+                <button type="button" id="dodajRezTesta">Dodaj rezultate testa</button>
+            </form>
+        </div>
+    </div>
+</BODY>
+
+</HTML>

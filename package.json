@@ -1,0 +1,22 @@
+{
+  "name": "wt21p18729",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://mmarincic1@bitbucket.org/mmarincic1/wt21p18729.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://bitbucket.org/mmarincic1/wt21p18729/issues"
+  },
+  "homepage": "https://bitbucket.org/mmarincic1/wt21p18729#readme",
+  "dependencies": {
+    "express": "^4.17.2"
+  }
+}
