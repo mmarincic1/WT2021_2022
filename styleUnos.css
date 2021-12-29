@@ -1,0 +1,66 @@
+body{
+    background-color: cadetblue;
+}
+
+h1{
+    font-size: x-large;
+}
+
+.upiti{
+    margin-top: 2.5%;
+    margin-left: 25%;
+    margin-right: 25%;
+    background-color: rgb(112, 169, 204);
+    border: 1px solid rgb(4, 35, 77);
+    padding: 10px;
+}
+
+#unosZadataka{
+    margin-top: 2.5%;
+    margin-left: 25%;
+    margin-right: 25%;
+    background-color: rgb(112, 169, 204);
+    border: 1px solid rgb(4, 35, 77);
+    padding: 10px;
+    display: none;
+}
+
+label{
+    display: inline;
+    width: 100%;
+    font-size: large;
+}
+
+.inputText{
+    box-sizing: border-box;
+    width: 100%;
+    padding: 6px;
+    margin-bottom: 5px;
+}
+
+button{
+    margin-top: 10px;
+    padding: 5px;
+    box-sizing: border-box;
+    background-color: rgb(80, 139, 175);
+    width: 100%;
+    border: 1px solid rgb(4, 35, 77);
+    font-size: large;
+    cursor: pointer;
+}
+button:hover {
+    background-color: rgb(48, 113, 204);;
+  }
+
+
+@media screen and (max-width: 700px) {
+    h1{
+        font-size: larger;
+    }
+    button{
+        font-size: medium;
+    }
+    label{
+        font-size: medium;
+    }
+}
