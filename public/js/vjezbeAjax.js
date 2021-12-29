@@ -14,7 +14,7 @@ let VjezbeAjax = (function () {
         ajax.send(vjezbeObjekat);
         ajax.onreadystatechange = function () {
             if (ajax.readyState == 4 && ajax.responseText.includes("error"))
-                callbackFja(ajax.responseText, null);
+                callbackFja(JSON.parse(ajax.responseText)['data'], null);
             else if (ajax.readyState == 4 && ajax.status == 200)
                 callbackFja(null, vjezbeObjekat);
         };
@@ -26,7 +26,7 @@ let VjezbeAjax = (function () {
         ajax.send();
         ajax.onreadystatechange = function () {
             if (ajax.readyState == 4 && ajax.responseText.includes("error"))
-                callbackFja(ajax.responseText, null);
+                callbackFja(JSON.parse(ajax.responseText)['status'], null);
             else if (ajax.readyState == 4 && ajax.status == 200)
                 callbackFja(null, ajax.responseText);
             else if (ajax.readyState == 4 && ajax.status == 404)
