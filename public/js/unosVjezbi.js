@@ -26,4 +26,5 @@ function posaljiZadatke(){
             console.log(err);
         else console.log(data);
     });
+    window.location.reload(); // PITAJ TREBA LI OVO
 }

@@ -30,13 +30,60 @@ let VjezbeAjax = (function () {
             else if (ajax.readyState == 4 && ajax.status == 200)
                 callbackFja(null, ajax.responseText);
             else if (ajax.readyState == 4 && ajax.status == 404)
-                callbackFja(ajax.responseText, null);
+                callbackFja(JSON.parse(ajax.responseText)['status'], null);
         };
+    }
+
+    const iscrtajVjezbe = function (divDOMelement, jsonObjekat) {
+        divDOMelement.innerHTML = "";
+        let brojV = JSON.parse(jsonObjekat)['brojVjezbi'];
+        for (let i = 0; i < brojV; i++) {
+            let noviDiv = document.createElement('div');
+            noviDiv.className = "vjezbaDiv"
+            let noviBtn = document.createElement('button');
+            noviBtn.id = "vjezba" + (i + 1);
+            noviBtn.className = "vjezba";
+            noviBtn.innerHTML = "VJEŽBA " + (i + 1);
+            let brojZ = JSON.parse(jsonObjekat)['brojZadataka'][i];
+            let noviDivZadaci = document.createElement('div');
+            noviDivZadaci.className = "zadaci";
+            noviBtn.addEventListener('click', function () {
+                iscrtajZadatke(noviDivZadaci, brojZ)
+            });
+            noviDiv.appendChild(noviBtn);
+            noviDiv.appendChild(noviDivZadaci);
+            divDOMelement.appendChild(noviDiv);
+        }
+    }
+
+    var kliknuti = [];
+
+    const iscrtajZadatke = function (divDOMelement, brojZadataka) {
+        if (kliknuti.includes(divDOMelement)) {
+            if( divDOMelement.style.display == 'block')
+                divDOMelement.style.display = 'none';
+            else  divDOMelement.style.display = 'block';
+        }
+        else {
+            kliknuti.push(divDOMelement);
+            for (let i = 0; i < brojZadataka; i++) {
+                let noviBtn = document.createElement('button');
+                noviBtn.innerHTML = "ZADATAK " + (i + 1);
+                noviBtn.id = "zadaciBtn";
+                divDOMelement.appendChild(noviBtn);
+            }
+            divDOMelement.style.display = 'block';
+        }
+        for (let i = 0; i < kliknuti.length; i++)
+            if (kliknuti.at(i) != divDOMelement)
+                kliknuti.at(i).style.display = "none";
     }
 
     return {
         dodajInputPolja: dodajInputPolja,
         posaljiPodatke: posaljiPodatke,
-        dohvatiPodatke: dohvatiPodatke
+        dohvatiPodatke: dohvatiPodatke,
+        iscrtajVjezbe: iscrtajVjezbe,
+        iscrtajZadatke: iscrtajZadatke
     }
 }());

@@ -29,27 +29,35 @@ body{
       bottom: 0;
     }
 
-  #vjezba{
+  .vjezba{
       background-color: rgb(80, 139, 175);
       border: 1px solid rgb(4, 35, 77);
       padding: 10px;
-
+      width: 100%;
       margin-bottom: 10px;
+      cursor: pointer;
   }
 
-  #vjezba:nth-of-type(1), #vjezba:nth-of-type(6){
+  button:hover {
+    background-color: rgb(41, 97, 175);
+  }
+
+  .vjezba:nth-of-type(1){
       margin-bottom: 0;
   }
 
   #vjezbeTabela{
     display: grid;
-    padding: 10px;
+    padding: 5px;
     border: 1px solid rgb(4, 35, 77);
     background-color: rgb(112, 169, 204);
-    /*grid-gap: 10px;*/
     grid-auto-rows: auto;
     box-sizing: border-box;
     margin: 10px;
+  }
+
+  .vjezbaDiv{
+    padding: 5px;
   }
 
   .grafovi{
@@ -63,10 +71,11 @@ body{
       height: 100%;
   }
 
-  #zadaci{
+  .zadaci{
       padding: 3px;
       border: 1px solid rgb(4, 35, 77);
       background-color: rgb(48, 113, 204);
+      display: none;
   }
 
   #zadaciBtn{
@@ -78,6 +87,7 @@ body{
       padding-right: 5px;
       padding-left: 5px;
       margin-right: 3px;
+      margin-bottom: 1px;
   }
 
   @media screen and (min-width:800px) {
