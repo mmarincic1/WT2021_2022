@@ -15,7 +15,7 @@ const url = require('url');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/vjezbe/', function (req, res) {
+app.get('/vjezbe', function (req, res) {
     fs.readFile('vjezbe.csv', 'utf-8', function (err, buffer) {
         var vjezbe = buffer.toString('utf-8');
         var redovi = vjezbe.split(" ");
