@@ -14,12 +14,15 @@
             <h1>Unesite broj vježbi</h1>
             <div>
                 <label for="brojVjezbi">Broj vježbi:</label>
-                <input type="text" id="brojVjezbi" class="inputText" onchange="dodajInputPolja()">
+                <input type="number" id="brojVjezbi" class="inputText" onchange="dodajInputPolja()" name="brojVjezbi">
             </div>
         </form>
     </div>
     <div id="unosZadataka">
 
+    </div>
+    <div id="posaljiZadatke">
+        <button id="posaljiFormu" onclick="posaljiZadatke()">Pošalji zadatke</button>
     </div>
 </BODY>
 
