@@ -20,7 +20,7 @@ app.get('/vjezbe', function (req, res) {
         var vjezbe = buffer.toString('utf-8');
         var redovi = vjezbe.split(" ");
         var zadaci = redovi[1].split(",");
-        var brojVjezbi = parseInt(redovi.at(0).at(0));
+        var brojVjezbi = parseInt(redovi.at(0));
         var zadaciVjezbi = [];
         for (let i = 0; i < zadaci.length; i++) {
             zadaciVjezbi.push(parseInt(zadaci.at(i).trim()));
