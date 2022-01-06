@@ -58,7 +58,10 @@ let VjezbeAjax = (function () {
         let error = false;
         if (jsonObjekat['brojVjezbi'] > 15 || jsonObjekat['brojVjezbi'] < 0)
             error = true;
+
         let zadaci = jsonObjekat['brojZadataka'];
+        if (zadaci.length != jsonObjekat['brojVjezbi'])
+            error = true;
         for (let i = 0; i < zadaci.length; i++)
             if (zadaci.at(i) < 0 || zadaci.at(i) > 10) {
                 error = true;
@@ -68,7 +71,7 @@ let VjezbeAjax = (function () {
             return;
         // kraj provjere    
         divDOMelement.innerHTML = "";
-        brojV = jsonObjekat['brojVjezbi'];
+        let brojV = jsonObjekat['brojVjezbi'];
         for (let i = 0; i < brojV; i++) {
             let noviDiv = document.createElement('div');
             noviDiv.className = "vjezbaDiv"
