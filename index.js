@@ -17,6 +17,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/vjezbe', function (req, res) {
     fs.readFile('vjezbe.csv', 'utf-8', function (err, buffer) {
+        if(err)
+            throw err;
         var vjezbe = buffer.toString('utf-8');
         var redovi = vjezbe.split(" ");
         var zadaci = redovi[1].split(",");

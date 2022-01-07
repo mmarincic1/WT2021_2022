@@ -1,6 +1,6 @@
 let VjezbeAjax = (function () {
     const dodajInputPolja = function (DOMelementDIVauFormi, brojVjezbi) {
-        var noveLabele = "";
+        let noveLabele = "";
         for (let i = 0; i < brojVjezbi; i++) {
             noveLabele += "<label for=z" + i + ">Broj zadataka za Vježbu " + (i + 1) + ":</label><input type=\"text\" id=z" + i + " class=\"inputText\" value=4 name=z" + i + ">"
         }
@@ -8,7 +8,7 @@ let VjezbeAjax = (function () {
     }
 
     const posaljiPodatke = function (vjezbeObjekat, callbackFja) {
-        var ajax = new XMLHttpRequest();
+        let ajax = new XMLHttpRequest();
         ajax.open("POST", "http://localhost:3000/vjezbe", true);
         ajax.setRequestHeader("Content-Type", "application/json");
         ajax.send(vjezbeObjekat);
@@ -17,6 +17,8 @@ let VjezbeAjax = (function () {
                 callbackFja(JSON.parse(ajax.responseText)['data'], null);
             else if (ajax.readyState == 4 && ajax.status == 200)
                 callbackFja(null, vjezbeObjekat);
+            else if (ajax.readyState == 4 && ajax.status == 404)
+                callbackFja("error", null);
         };
     }
 
