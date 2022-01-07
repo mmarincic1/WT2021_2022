@@ -33,7 +33,7 @@ let VjezbeAjax = (function () {
             else if (ajax.readyState == 4 && ajax.status == 200) {
                 let objekat = JSON.parse(ajax.responseText);
                 var pogresniParametri = [];
-                if (JSON.parse(ajax.responseText)['brojVjezbi'] > 15 || JSON.parse(ajax.responseText)['brojVjezbi'] < 0)
+                if (JSON.parse(ajax.responseText)['brojVjezbi'] > 15 || JSON.parse(ajax.responseText)['brojVjezbi'] < 1)
                     pogresniParametri.push("brojVjezbi");
                 let zadaci = JSON.parse(ajax.responseText)['brojZadataka'];
                 for (let i = 0; i < zadaci.length; i++)
@@ -58,7 +58,7 @@ let VjezbeAjax = (function () {
     const iscrtajVjezbe = function (divDOMelement, jsonObjekat) {
         // dodao sam i ovdje provjeru za svaki slucaj
         let error = false;
-        if (jsonObjekat['brojVjezbi'] > 15 || jsonObjekat['brojVjezbi'] < 0)
+        if (jsonObjekat['brojVjezbi'] > 15 || jsonObjekat['brojVjezbi'] < 1)
             error = true;
 
         let zadaci = jsonObjekat['brojZadataka'];
