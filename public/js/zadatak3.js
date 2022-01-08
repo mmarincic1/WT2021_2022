@@ -18,7 +18,7 @@ describe('VjezbeAjax', function () {
         });
     });
 
-    
+
     chai.should();
     describe('posaljiPodatke()', function () {
         beforeEach(function () {
@@ -41,7 +41,8 @@ describe('VjezbeAjax', function () {
                 assert.deepEqual(data, { "brojVjezbi": 2, "brojZadataka": [1, 2] });
                 done();
             });
-            this.requests[0].requestBody.should.equal(data1);
+            //this.requests[0].requestBody.should.equal(data1);
+            this.requests[0].requestBody.should.equal(dataJson);
             this.requests[0].respond(200, { 'Content-Type': 'text/json' }, dataJson);
         });
         it('Ispravni podaci 2', function (done) {
@@ -52,31 +53,36 @@ describe('VjezbeAjax', function () {
                 assert.deepEqual(data, { "brojVjezbi": 1, "brojZadataka": [5] });
                 done();
             });
-            this.requests[0].requestBody.should.equal(data1);
+            //this.requests[0].requestBody.should.equal(data1);
+            this.requests[0].requestBody.should.equal(dataJson);
             this.requests[0].respond(200, { 'Content-Type': 'text/json' }, dataJson);
         });
         it('Neispravni podaci 1', function (done) {
             let data1 = { "brojVjezbi": -1, "brojZadataka": [] };
             let data2 = { status: "error", data: "Pogrešan podatak brojVjezbi,brojZadataka" };
             let dataJson = JSON.stringify(data2);
+            let dataJson1 = JSON.stringify(data1);
             VjezbeAjax.posaljiPodatke(data1, function (err, data) {
                 assert.equal(err, 'Pogrešan podatak brojVjezbi,brojZadataka', 'Podaci nisu ispravni!');
                 assert.deepEqual(data, null, 'Podaci nisu ispravni!');
                 done();
             });
-            this.requests[0].requestBody.should.equal(data1);
+            //this.requests[0].requestBody.should.equal(data1);
+            this.requests[0].requestBody.should.equal(dataJson1);
             this.requests[0].respond(200, { 'Content-Type': 'text/json' }, dataJson);
         });
         it('Neispravni podaci 2', function (done) {
             let data1 = { "brojVjezbi": 5, "brojZadataka": [1, 2, 3, -4, 5] };
             let data2 = { status: "error", data: "Pogrešan podatak z3" };
             let dataJson = JSON.stringify(data2);
+            let dataJson1 = JSON.stringify(data1);
             VjezbeAjax.posaljiPodatke(data1, function (err, data) {
                 assert.equal(err, 'Pogrešan podatak z3', 'Podaci nisu ispravni!');
                 assert.deepEqual(data, null, 'Podaci nisu ispravni!');
                 done();
             });
-            this.requests[0].requestBody.should.equal(data1);
+            //this.requests[0].requestBody.should.equal(data1);
+            this.requests[0].requestBody.should.equal(dataJson1);
             this.requests[0].respond(200, { 'Content-Type': 'text/json' }, dataJson);
         });
         it('Neka greska', function (done) {
@@ -156,7 +162,7 @@ describe('VjezbeAjax', function () {
         it('Ispravni podaci 1', function (done) {
             VjezbeAjax.dohvatiPodatke(function (err, data) {
                 assert.equal(err, null, 'Nisu pogresni podaci!');
-                assert.deepEqual(data, {"brojVjezbi": 5, "brojZadataka":[1,2,3,4,5]});
+                assert.deepEqual(data, { "brojVjezbi": 5, "brojZadataka": [1, 2, 3, 4, 5] });
                 done();
             });
             this.requests[0].respond(200, { 'Content-Type': 'text/json' }, '{"brojVjezbi": 5, "brojZadataka":[1,2,3,4,5]}');
@@ -164,13 +170,13 @@ describe('VjezbeAjax', function () {
         it('Ispravni podaci 2', function (done) {
             VjezbeAjax.dohvatiPodatke(function (err, data) {
                 assert.equal(err, null, 'Nisu pogresni podaci!');
-                assert.deepEqual(data, {"brojVjezbi": 8, "brojZadataka":[1,2,3,4,5,6,7,8]});
+                assert.deepEqual(data, { "brojVjezbi": 8, "brojZadataka": [1, 2, 3, 4, 5, 6, 7, 8] });
                 done();
             });
             this.requests[0].respond(200, { 'Content-Type': 'text/json' }, '{"brojVjezbi": 8, "brojZadataka":[1,2,3,4,5,6,7,8]}');
         });
     });
-   
+
 
     describe('iscrtajVjezbe()', function () {
         it('BrojVjezbi < 0', function () {

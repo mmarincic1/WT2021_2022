@@ -21,7 +21,7 @@ function posaljiZadatke(){
     }
     json = json.substring(0, json.length-1);
     json+="]}";
-    VjezbeAjax.posaljiPodatke(json, function (err, data) {
+    VjezbeAjax.posaljiPodatke(JSON.parse(json), function (err, data) {
         if(err)
             console.log(err);
         else console.log(data);

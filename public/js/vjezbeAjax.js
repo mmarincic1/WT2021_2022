@@ -11,7 +11,7 @@ let VjezbeAjax = (function () {
         let ajax = new XMLHttpRequest();
         ajax.open("POST", "http://localhost:3000/vjezbe", true);
         ajax.setRequestHeader("Content-Type", "application/json");
-        ajax.send(vjezbeObjekat);
+        ajax.send(JSON.stringify(vjezbeObjekat));
         ajax.onreadystatechange = function () {
             if (ajax.readyState == 4 && ajax.responseText.includes("error"))
                 callbackFja(JSON.parse(ajax.responseText)['data'], null);
