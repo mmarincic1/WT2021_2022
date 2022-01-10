@@ -167,6 +167,14 @@ describe('VjezbeAjax', function () {
             });
             this.requests[0].respond(200, { 'Content-Type': 'text/json' }, '{"brojVjezbi": null, "brojZadataka":[1,2.5,3.1,4,5,6]}');
         });
+        it('Pogresni podaci 6', function (done) {
+            VjezbeAjax.dohvatiPodatke(function (err, data) {
+                assert.equal(err, "Pogrešan parametar brojVjezbi,brojZadataka", 'Pogresni podaci!');
+                assert.deepEqual(data, null);
+                done();
+            });
+            this.requests[0].respond(200, { 'Content-Type': 'text/json' }, '{"brojVjezbi": 5.5, "brojZadataka":[1,2,3,4,5]}');
+        });
         it('Ispravni podaci 1', function (done) {
             VjezbeAjax.dohvatiPodatke(function (err, data) {
                 assert.equal(err, null, 'Nisu pogresni podaci!');
