@@ -26,7 +26,7 @@ app.get('/vjezbe', function (req, res) {
         }
         else {
             var zadaci = redovi[1].split(",");
-            var brojVjezbi = parseInt(redovi.at(0));
+            var brojVjezbi = parseFloat(redovi.at(0));
             var zadaciVjezbi = [];
             for (let i = 0; i < zadaci.length; i++) {
                 zadaciVjezbi.push(parseFloat(zadaci.at(i).trim()));
@@ -42,7 +42,8 @@ app.post('/vjezbe', function (req, res) {
     var zadaci = tijelo['brojZadataka'];
     var pogresniParametri = [];
 
-    if (parseInt(tijelo['brojVjezbi']) < 1 || parseInt(tijelo['brojVjezbi']) > 15)
+    if (parseInt(tijelo['brojVjezbi']) < 1 || parseInt(tijelo['brojVjezbi']) > 15 ||
+    (parseFloat(tijelo['brojVjezbi']) != parseInt(tijelo['brojVjezbi'])))
         pogresniParametri.push("brojVjezbi");
 
     for (let i = 0; i < zadaci.length; i++)
@@ -50,7 +51,7 @@ app.post('/vjezbe', function (req, res) {
             (parseInt(zadaci.at(i)) != parseFloat(zadaci.at(i))))
             pogresniParametri.push("z" + i);
 
-    if (zadaci.length != parseInt(tijelo['brojVjezbi']))
+    if (zadaci.length != parseFloat(tijelo['brojVjezbi']))
         pogresniParametri.push("brojZadataka");
 
     var greske = pogresniParametri.join();

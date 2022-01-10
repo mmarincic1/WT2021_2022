@@ -34,7 +34,8 @@ let VjezbeAjax = (function () {
                 let objekat = JSON.parse(ajax.responseText);
                 var pogresniParametri = [];
                 if (JSON.parse(ajax.responseText)['brojVjezbi'] > 15 || JSON.parse(ajax.responseText)['brojVjezbi'] < 1
-                    || JSON.parse(ajax.responseText)['brojVjezbi'] == null)
+                    || JSON.parse(ajax.responseText)['brojVjezbi'] == null || 
+                    (parseInt(JSON.parse(ajax.responseText)['brojVjezbi']) != parseFloat(JSON.parse(ajax.responseText)['brojVjezbi'])))
                     pogresniParametri.push("brojVjezbi");
                 let zadaci = JSON.parse(ajax.responseText)['brojZadataka'];
                 for (let i = 0; i < zadaci.length; i++)
