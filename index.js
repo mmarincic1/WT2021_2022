@@ -17,18 +17,23 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/vjezbe', function (req, res) {
     fs.readFile('vjezbe.csv', 'utf-8', function (err, buffer) {
-        if(err)
+        if (err)
             throw err;
         var vjezbe = buffer.toString('utf-8');
         var redovi = vjezbe.split(" ");
-        var zadaci = redovi[1].split(",");
-        var brojVjezbi = parseInt(redovi.at(0));
-        var zadaciVjezbi = [];
-        for (let i = 0; i < zadaci.length; i++) {
-            zadaciVjezbi.push(parseInt(zadaci.at(i).trim()));
+        if (redovi.length != 2) { // uvijek mora biti 2 reda u mom stilu formatiranja
+            res.json({ brojVjezbi: null, brojZadataka: [null] });
         }
-        const objekat = { brojVjezbi: brojVjezbi, brojZadataka: zadaciVjezbi };
-        res.json(objekat);
+        else {
+            var zadaci = redovi[1].split(",");
+            var brojVjezbi = parseInt(redovi.at(0));
+            var zadaciVjezbi = [];
+            for (let i = 0; i < zadaci.length; i++) {
+                zadaciVjezbi.push(parseInt(zadaci.at(i).trim()));
+            }
+            const objekat = { brojVjezbi: brojVjezbi, brojZadataka: zadaciVjezbi };
+            res.json(objekat);
+        }
     });
 });
 
