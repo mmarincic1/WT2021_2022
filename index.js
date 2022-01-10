@@ -29,7 +29,7 @@ app.get('/vjezbe', function (req, res) {
             var brojVjezbi = parseInt(redovi.at(0));
             var zadaciVjezbi = [];
             for (let i = 0; i < zadaci.length; i++) {
-                zadaciVjezbi.push(parseInt(zadaci.at(i).trim()));
+                zadaciVjezbi.push(parseFloat(zadaci.at(i).trim()));
             }
             const objekat = { brojVjezbi: brojVjezbi, brojZadataka: zadaciVjezbi };
             res.json(objekat);
@@ -46,7 +46,8 @@ app.post('/vjezbe', function (req, res) {
         pogresniParametri.push("brojVjezbi");
 
     for (let i = 0; i < zadaci.length; i++)
-        if (zadaci.at(i) < 0 || zadaci.at(i) > 10)
+        if (zadaci.at(i) < 0 || zadaci.at(i) > 10 ||
+            (parseInt(zadaci.at(i)) != parseFloat(zadaci.at(i))))
             pogresniParametri.push("z" + i);
 
     if (zadaci.length != parseInt(tijelo['brojVjezbi']))

@@ -33,12 +33,13 @@ let VjezbeAjax = (function () {
             else if (ajax.readyState == 4 && ajax.status == 200) {
                 let objekat = JSON.parse(ajax.responseText);
                 var pogresniParametri = [];
-                if (JSON.parse(ajax.responseText)['brojVjezbi'] > 15 || JSON.parse(ajax.responseText)['brojVjezbi'] < 1 
+                if (JSON.parse(ajax.responseText)['brojVjezbi'] > 15 || JSON.parse(ajax.responseText)['brojVjezbi'] < 1
                     || JSON.parse(ajax.responseText)['brojVjezbi'] == null)
                     pogresniParametri.push("brojVjezbi");
                 let zadaci = JSON.parse(ajax.responseText)['brojZadataka'];
                 for (let i = 0; i < zadaci.length; i++)
-                    if (zadaci.at(i) < 0 || zadaci.at(i) > 10 || zadaci.at(i) == null)
+                    if (zadaci.at(i) < 0 || zadaci.at(i) > 10 || zadaci.at(i) == null ||
+                        (parseInt(zadaci.at(i)) != parseFloat(zadaci.at(i))))
                         pogresniParametri.push("z" + i);
 
                 if (zadaci.length != JSON.parse(ajax.responseText)['brojVjezbi'])
