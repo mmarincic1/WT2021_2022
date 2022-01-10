@@ -2,7 +2,7 @@ let VjezbeAjax = (function () {
     const dodajInputPolja = function (DOMelementDIVauFormi, brojVjezbi) {
         let noveLabele = "";
         for (let i = 0; i < brojVjezbi; i++) {
-            noveLabele += "<label for=z" + i + ">Broj zadataka za Vježbu " + (i + 1) + ":</label><input type=\"number\" id=z" + i + " class=\"inputText\" value=4 name=z" + i + ">"
+            noveLabele += "<label for=z" + i + ">Broj zadataka za Vježbu " + (i + 1) + ":</label><input type=\"number\" id=z" + i + " class=\"inputText\" value=4 name=z" + i + " min=0 max=10>"
         }
         DOMelementDIVauFormi.innerHTML = noveLabele;
     }
