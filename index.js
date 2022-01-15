@@ -12,28 +12,29 @@ app.use(express.static('public'))
 const http = require('http');
 const url = require('url');
 
+const db = require('./baza.js')
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
+
 app.get('/vjezbe', function (req, res) {
-    fs.readFile('vjezbe.csv', 'utf-8', function (err, buffer) {
-        if (err)
-            throw err;
-        var vjezbe = buffer.toString('utf-8');
-        var redovi = vjezbe.split(" ");
-        if (redovi.length != 2) { // uvijek mora biti 2 reda u mom stilu formatiranja
-            res.json({ brojVjezbi: null, brojZadataka: [null] });
-        }
-        else {
-            var zadaci = redovi[1].split(",");
-            var brojVjezbi = parseFloat(redovi.at(0));
-            var zadaciVjezbi = [];
-            for (let i = 0; i < zadaci.length; i++) {
-                zadaciVjezbi.push(parseFloat(zadaci.at(i).trim()));
+    db.vjezba.findAll().then(function (vjezbe) {
+        let brojVjezbi = vjezbe.length;
+        let brojZadataka = [];
+        db.zadatak.findAll().then(function (zadaci) {
+            for(let i = 0; i < vjezbe.length; i++){
+                let brojac = 0;
+                for(let j = 0; j < zadaci.length; j++){
+                    if(zadaci[j].VjezbaId == i+1)
+                        brojac++;
+                }
+                brojZadataka.push(brojac);
             }
-            const objekat = { brojVjezbi: brojVjezbi, brojZadataka: zadaciVjezbi };
+            const objekat = { brojVjezbi: brojVjezbi, brojZadataka: brojZadataka };
             res.json(objekat);
-        }
+        })
     });
 });
 
@@ -43,7 +44,7 @@ app.post('/vjezbe', function (req, res) {
     var pogresniParametri = [];
 
     if (parseInt(tijelo['brojVjezbi']) < 1 || parseInt(tijelo['brojVjezbi']) > 15 ||
-    (parseFloat(tijelo['brojVjezbi']) != parseInt(tijelo['brojVjezbi'])))
+        (parseFloat(tijelo['brojVjezbi']) != parseInt(tijelo['brojVjezbi'])))
         pogresniParametri.push("brojVjezbi");
 
     for (let i = 0; i < zadaci.length; i++)
@@ -58,11 +59,29 @@ app.post('/vjezbe', function (req, res) {
     if (greske.length > 0)
         res.json({ status: "error", data: "Pogrešan parametar " + greske })
     else {
-        let novaLinija = tijelo['brojVjezbi'] + " " + tijelo['brojZadataka'];
-        fs.writeFile('vjezbe.csv', novaLinija, function (err) {
-            if (err) throw err;
-            res.json(req.body);
-        });
+        // prvo brisemo iz baze
+        db.zadatak.destroy({
+            truncate: { cascade: true }
+        }).then(function () {
+            db.vjezba.destroy({
+                truncate: { cascade: true }
+            }).then(function () {
+                let listaVjezbi = [];
+                for (let i = 0; i < zadaci.length; i++) {
+                    listaVjezbi.push({ id: i + 1 });
+                }
+                db.vjezba.bulkCreate(listaVjezbi).then(function (vjezbeBaza) {
+                    let index = 1;
+                    for (let i = 0; i < zadaci.length; i++) {
+                        for (let j = 0; j < zadaci[i]; j++) {
+                            vjezbeBaza[i].createVjezbaId({id:index, VjezbaId:i+1});
+                            index++;
+                        }
+                    }
+                    res.json(tijelo)
+                })
+            })
+        })
     }
 });
 
