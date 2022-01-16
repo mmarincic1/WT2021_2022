@@ -11,6 +11,10 @@ body{
     padding: 10px;
 }
 
+#csvString{
+    width: 100%;
+}
+
 label{
     display: inline;
     width: 100%;

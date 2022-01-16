@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<HTML>
+
+<HEAD>
+    <TITLE>Novi student</TITLE>
+    <link rel="stylesheet" href="../css/repoStyle.css">
+    <SCRIPT src="../js/noviStudent.js"></SCRIPT>
+    <SCRIPT src="../js/studentAjax.js"></SCRIPT>
+</HEAD>
+
+<BODY>
+    <div class="upiti" id="upiti">
+        <form>
+            <h1>Novi student</h1>
+            <h2>Unesite podatke:</h2>
+            <div>
+                <label for="ime">Ime:</label>
+                <input type="text" id="ime" class="inputText">
+            </div>
+            <div>
+                <label for="prezime">Prezime:</label>
+                <input type="text" id="prezime" class="inputText">
+            </div>
+            <div>
+                <label for="index">Index:</label>
+                <input type="text" id="index" class="inputText">
+            </div>
+            <div>
+                <label for="grupa">Grupa:</label>
+                <input type="text" id="grupa" class="inputText">
+            </div>
+            <button type="button" id="posaljiBtn" onclick="dodajStudenta()">Dodaj studenta</button>
+        </form>
+    </div>
+
+    <div id="ajaxstatus" class="upiti"></div>
+</BODY>
+
+</HTML>

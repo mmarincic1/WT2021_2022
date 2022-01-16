@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<HTML>
+
+<HEAD>
+    <TITLE>Update grupe</TITLE>
+    <link rel="stylesheet" href="../css/repoStyle.css">
+    <SCRIPT src="../js/promijeniGrupu.js"></SCRIPT>
+    <SCRIPT src="../js/studentAjax.js"></SCRIPT>
+</HEAD>
+
+<BODY>
+    <div class="upiti" id="upiti">
+        <form>
+            <h1>Postavite grupu</h1>
+            <h2>Unesite podatke:</h2>
+            <div>
+                <label for="index">Index:</label>
+                <input type="text" id="index" class="inputText">
+            </div>
+            <div>
+                <label for="grupa">Nova grupa:</label>
+                <input type="text" id="grupa" class="inputText">
+            </div>
+            <button type="button" id="posaljiBtn" onclick="postaviGrupu()">Postavi novu grupu</button>
+        </form>
+    </div>
+
+    <div id="ajaxstatus" class="upiti"></div>
+</BODY>
+
+</HTML>

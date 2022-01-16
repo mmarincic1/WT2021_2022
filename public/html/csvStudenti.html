@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<HTML>
+
+<HEAD>
+    <TITLE>Dodajte studente</TITLE>
+    <link rel="stylesheet" href="../css/repoStyle.css">
+    <SCRIPT src="../js/csvStudenti.js"></SCRIPT>
+    <SCRIPT src="../js/studentAjax.js"></SCRIPT>
+</HEAD>
+
+<BODY>
+    <div class="upiti" id="upiti">
+        <h1>Dodajte studente u CSV formatu</h1>
+        <textarea name="" id="csvString" cols="30" rows="10">
+
+        </textarea>
+        <button type="button" id="posaljiBtn" onclick="postaviStudente()">Postavi nove studente</button>
+    </div>
+
+    <div id="ajaxstatus" class="upiti"></div>
+</BODY>
+
+</HTML>

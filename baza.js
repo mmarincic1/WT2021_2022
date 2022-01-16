@@ -11,6 +11,8 @@ db.sequelize = sequelize;
 //import modela
 db.vjezba = require('./models/vjezba.js')(sequelize)
 db.zadatak = require('./models/zadatak.js')(sequelize)
+db.student = require('./models/student.js')(sequelize)
+db.grupa = require('./models/grupa.js')(sequelize)
 
 //relacije
 db.vjezba.hasMany(db.zadatak,{as:'vjezbaId'});
