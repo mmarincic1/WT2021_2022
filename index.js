@@ -87,67 +87,103 @@ app.post('/vjezbe', function (req, res) {
     }
 });
 
-// treba li ovdje ikakvu provjeru podataka ??
 app.post('/student', function (req, res) {
     let tijelo = req.body;
-    db.student.findAll({ where: { index: tijelo['index'] } }).then(function (studenti) {
-        if (studenti.length > 0) {
-            res.json({ status: "”Student sa indexom " + tijelo['index'] + " već postoji!”" });
-            return;
-        }
-        // nema studenta pa ga dodaj u bazu
-        else {
-            db.student.create(tijelo).then(function (student) {
-                // napravili smo studenta sad moramo provjeriti da li ima grupe koja je poslana ukoliko nema i nju pravim
-                db.grupa.findAll({ where: { naziv: tijelo['grupa'] } }).then(function (grupe) {
-                    if (grupe.length > 0) {
-                        res.json({ status: "Kreiran student!" });
-                        return;
-                    }
-                    // nema grupe moramo i nju napraviti
-                    else {
-                        db.grupa.create({ naziv: tijelo['grupa'] }).then(function (grupa) {
+    // provjera ispravnosti podataka 
+    let greske = [];
+    if (tijelo['ime'].trim() == "")
+        greske.push("ime");
+    if (tijelo['prezime'].trim() == "")
+        greske.push("prezime");
+    if (tijelo['index'].trim() == "")
+        greske.push("index");
+    if (tijelo['grupa'].trim() == "")
+        greske.push("grupa");
+
+    if (greske.length > 0) {
+        res.json({ status: "Pogrešan parametar " + greske.join(",") + "!" });
+        return;
+    }
+    else {
+        db.student.findAll({ where: { index: tijelo['index'] } }).then(function (studenti) {
+            if (studenti.length > 0) {
+                res.json({ status: "”Student sa indexom " + tijelo['index'] + " već postoji!”" });
+                return;
+            }
+            // nema studenta pa ga dodaj u bazu
+            else {
+                db.student.create(tijelo).then(function (student) {
+                    // napravili smo studenta sad moramo provjeriti da li ima grupe koja je poslana ukoliko nema i nju pravim
+                    db.grupa.findAll({ where: { naziv: tijelo['grupa'] } }).then(function (grupe) {
+                        if (grupe.length > 0) {
                             res.json({ status: "Kreiran student!" });
                             return;
-                        })
-                    }
+                        }
+                        // nema grupe moramo i nju napraviti
+                        else {
+                            db.grupa.create({ naziv: tijelo['grupa'] }).then(function (grupa) {
+                                res.json({ status: "Kreiran student!" });
+                                return;
+                            })
+                        }
+                    })
                 })
-            })
-        }
+            }
 
-    })
+        })
+    }
 });
 
 app.put('/student/:index', function (req, res) {
     let tijelo = req.body;
-    db.student.findAll({ where: { index: req.params.index } }).then(function (student) {
-        if (student.length > 0) { // student postoji, uvijek je jedan
-            student[0].update({ grupa: tijelo['grupa'] }).then(function (uspjeh) {
-                // sada jos moramo provjeriti da li grupa postoji ili ne
-                db.grupa.findAll({ where: { naziv: tijelo['grupa'] } }).then(function (grupe) {
-                    if (grupe.length > 0) {
-                        res.json({ status: "Promjenjena grupa studentu " + req.params.index });
-                        return;
-                    }
-                    // nema grupe moramo i nju napraviti
-                    else {
-                        db.grupa.create({ naziv: tijelo['grupa'] }).then(function (grupa) {
+    if (tijelo['grupa'].trim() == "")
+        res.json({ status: "Pogrešan parametar grupa!" });
+    else {
+        db.student.findAll({ where: { index: req.params.index } }).then(function (student) {
+            if (student.length > 0) { // student postoji, uvijek je jedan
+                student[0].update({ grupa: tijelo['grupa'] }).then(function (uspjeh) {
+                    // sada jos moramo provjeriti da li grupa postoji ili ne
+                    db.grupa.findAll({ where: { naziv: tijelo['grupa'] } }).then(function (grupe) {
+                        if (grupe.length > 0) {
                             res.json({ status: "Promjenjena grupa studentu " + req.params.index });
                             return;
-                        })
-                    }
+                        }
+                        // nema grupe moramo i nju napraviti
+                        else {
+                            db.grupa.create({ naziv: tijelo['grupa'] }).then(function (grupa) {
+                                res.json({ status: "Promjenjena grupa studentu " + req.params.index });
+                                return;
+                            })
+                        }
+                    })
                 })
-            })
-        }
-        else {
-            res.json({ status: "Student sa indexom " + req.params.index + " ne postoji" });
-            return;
-        }
-    })
+            }
+            else {
+                res.json({ status: "Student sa indexom " + req.params.index + " ne postoji" });
+                return;
+            }
+        })
+    }
 });
 
 app.post('/batch/student', function (req, res) {
     let tijelo = req.body;
+    // provjera podataka csva
+    let provjera = tijelo.split("\n");
+    for(let i = 0; i < provjera.length; i++){
+        let provjera1 = provjera[i].split(",");
+        if(provjera1.length != 4){
+            res.json({status: "Pogrešan format csv podataka!"});
+            return;
+        }
+        for(let j = 0; j < 4; j++){
+            if(provjera1[j].trim() == ""){
+                res.json({status: "Pogrešan format csv podataka!"});
+                return;
+            }
+        }
+    }
+
     db.student.findAll().then(function (studentiBaza) {
         let studenti = tijelo.split("\n");
         let noviStudenti = [];
