@@ -20,6 +20,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 
+db.sequelize.sync();
 
 app.get('/vjezbe', function (req, res) {
     db.vjezba.findAll().then(function (vjezbe) {

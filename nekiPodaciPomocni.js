@@ -1,11 +1,11 @@
-const db = require('./baza.js')
+/*const db = require('./baza.js')
 db.sequelize.sync({ force: true }).then(function () {
-    /*inicializacija().then(function () {
+    inicializacija().then(function () {
         console.log("Gotovo kreiranje tabela i ubacivanje pocetnih podataka!");
         process.exit();
-    });*/
+    });
 });
-/*
+
 function inicializacija() {
     var ListaPromisea1 = [];
     var ListaPromisea2 = [];
