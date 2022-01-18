@@ -194,7 +194,7 @@ app.post('/batch/student', function (req, res) {
             let postoji = 0;
             let osobine = studenti[i].split(",");
             for (let j = 0; j < studentiBaza.length; j++) {
-                if (studentiBaza[i].index == osobine[2]) {
+                if (studentiBaza[j].index == osobine[2]) {
                     postoji = 1;
                     postojeciStudenti.push(osobine[2]);
                     break;
