@@ -108,7 +108,7 @@ app.post('/student', function (req, res) {
     else {
         db.student.findAll({ where: { index: tijelo['index'] } }).then(function (studenti) {
             if (studenti.length > 0) {
-                res.json({ status: "”Student sa indexom " + tijelo['index'] + " već postoji!”" });
+                res.json({ status: "Student sa indexom " + tijelo['index'] + " već postoji!" });
                 return;
             }
             // nema studenta pa ga dodaj u bazu
@@ -170,6 +170,10 @@ app.put('/student/:index', function (req, res) {
 app.post('/batch/student', function (req, res) {
     let tijelo = req.body;
     // provjera podataka csva
+    if(tijelo.trim() == ""){
+        res.json({status: "Pogrešan format csv podataka!"});
+        return;
+    }
     let provjera = tijelo.split("\n");
     for(let i = 0; i < provjera.length; i++){
         let provjera1 = provjera[i].split(",");
@@ -259,4 +263,6 @@ app.post('/batch/student', function (req, res) {
     })
 })
 
-app.listen(3000);
+let exportVar = app.listen(3000);
+
+module.exports = exportVar;
