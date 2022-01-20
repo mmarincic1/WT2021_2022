@@ -369,7 +369,7 @@ describe('Testovi novih ruta', function () {
             assert.equal(studenti.length, 3, "Trebalo je da se ubace 3 studenta u bazu!");
 
             let grupe = await db.grupa.findAll();
-            assert.equal(grupe.length, 3, "Treba da se dodaju 2 grupe u bazu!");
+            assert.equal(grupe.length, 3, "Treba da se dodaju 3 grupe u bazu!");
         });
 
 
